@@ -1,5 +1,7 @@
 package main
 
+import "log"
+
 var (
 	counters = make(map[string]float64)
 	gauges   = make(map[string]float64)
@@ -14,10 +16,20 @@ func init() {
 func readPacket(p packet) {
 	switch p.bucket {
 	case "c":
-		if _, f := counters[p.name]; !f {
-			counters[p.name] = 0.0
+		if *counterAsGauge == true {
+			if _, f := gauges[p.name]; !f {
+				gauges[p.name] = 0.0
+			}
+			gauges[p.name] += p.value
+			if *debug {
+				log.Printf("counter as guage %.1f\n", gauges[p.name])
+			}
+		} else {
+			if _, f := counters[p.name]; !f {
+				counters[p.name] = 0.0
+			}
+			counters[p.name] += p.value
 		}
-		counters[p.name] += p.value
 
 	case "g":
 		gauges[p.name] = p.value

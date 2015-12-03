@@ -76,13 +76,21 @@ func submitLibrato() (err error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != 200 {
+		if resp.StatusCode == 400 {
+			resetAll()
+		}
 		raw, _ := ioutil.ReadAll(resp.Body)
 		return fmt.Errorf("%s: %s", resp.Status, string(raw))
 	}
 
+	if *debug {
+		raw, _ := ioutil.ReadAll(resp.Body)
+		log.Printf("%s: %s", resp.Status, string(raw))
+	}
+
 	log.Printf("%d measurements sent to librato\n", m.Count())
 
-	resetTimers()
+	resetAll()
 
 	return
 }
