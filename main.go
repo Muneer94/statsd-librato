@@ -21,7 +21,7 @@ var (
 	proxy          = flag.String("proxy", "", "send metrics to a proxy rather than directly to librato")
 	debug          = flag.Bool("debug", false, "enable logging of inputs and submissions")
 	version        = flag.Bool("version", false, "print version and exit")
-	counterAsGauge = flag.Bool("counterAsGauge", true, "use counters as guage for Librato compatibility")
+	counterAsGauge = flag.Bool("counterAsGauge", false, "use counters as guage for Librato compatibility")
 )
 
 func monitor() {

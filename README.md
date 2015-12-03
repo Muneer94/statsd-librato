@@ -12,7 +12,7 @@ Usage of statsd:
   -debug=false: enable logging of inputs and submissions
   -flush=60: interval at which data is sent to librato (in seconds)
   -percentiles="": comma separated list of percentiles to calculate for timers (eg. "95,99.5")
-  -counterAsGauge=true: submit counters as gauge for Librato compatibility
+  -counterAsGauge=false: submit counters as gauge for Librato compatibility
   -source="": librato api source (LIBRATO_SOURCE)
   -token="": librato api token (LIBRATO_TOKEN)
   -user="": librato api username (LIBRATO_USER)
